@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel ="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- === SEO Dynamic === -->
+    <title>{% block title %}{{ title|default:"Web Game News" }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ description|default:"Latest news, guides and reviews on web games." }}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{{ keywords|default:"web games, game news, reviews, guides" }}{% endblock %}">
+
+    <!-- Canonical (SEO Anti-Duplicate) -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- === Open Graph (Facebook / WhatsApp / Discord) === -->
+    <meta property="og:title" content="{% block og_title %}{{ title|default:"Web Game News" }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ description|default:"Latest news, guides and reviews on web games." }}{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    {% block og_image %}
+    <meta property="og:image" content="{{ og_image|default_if_none:'/static/default-og.jpg' }}">
+    {% endblock %}
+
+    <!-- === Twitter Cards === -->
+    <meta name="twitter:card" content="summary_large_image">
+    {% block twitter_title %}
+    <meta name="twitter:title" content="{{ title|default:'Web Game News' }}">
+    {% endblock %}
+    {% block twitter_description %}
+    <meta name="twitter:description" content="{{ description|default:'Latest news, guides and reviews on web games.' }}">
+    {% endblock %}
+    {% block twitter_image %}
+    <meta name="twitter:image" content="{{ og_image|default_if_none:'/static/default-og.jpg' }}">
+    {% endblock %}
+
+    <!-- Structured Data (schema.org) -->
+    {% block schema %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{ title|default:'Web Game News' }}",
+      "url": "{{ request.build_absolute_uri }}"
+    }
+    </script>
+    {% endblock %}
+
+    <!-- Tailwind (compiled by django-tailwind-cli) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #da373d;
+      }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+    {% block content %}{% endblock %}
+</body>
+</html>

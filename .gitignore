@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Environments
+.env
+env/
+venv/
+ENV/
+.venv/
+
+# Vercel & Build folders
+.vercel
+dist/
+build/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# My Local IDE
+.vscode/
+.idea/
